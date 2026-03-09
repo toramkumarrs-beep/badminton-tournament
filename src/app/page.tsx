@@ -89,7 +89,7 @@ export default function HomePage() {
           >
             Dominate the <br className="hidden md:block" />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">
-              Badminton Court
+              Tournament Manager
             </span>
           </motion.h1>
 
