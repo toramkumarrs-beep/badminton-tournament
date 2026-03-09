@@ -10,6 +10,7 @@
     "postinstall": "prisma generate && prisma migrate deploy"
   },
   "dependencies": {
+    "@prisma/client": "^5.22.0",
     "@tailwindcss/postcss": "^4.2.1",
     "autoprefixer": "^10.4.27",
     "clsx": "^2.1.1",
@@ -18,6 +19,7 @@
     "lucide-react": "^0.577.0",
     "next": "16.1.6",
     "postcss": "^8.5.8",
+    "prisma": "^5.22.0",
     "react": "19.2.3",
     "react-dom": "19.2.3",
     "tailwind-merge": "^3.5.0",
@@ -25,13 +27,11 @@
     "uuid": "^13.0.0"
   },
   "devDependencies": {
-    "@prisma/client": "^5.22.0",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "16.1.6",
-    "prisma": "^5.22.0",
     "typescript": "^5"
   }
 }
