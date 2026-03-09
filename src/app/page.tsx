@@ -87,9 +87,9 @@ export default function HomePage() {
             transition={{ duration: 0.8, delay: 0.1, ease: "easeOut" }}
             className="text-5xl md:text-7xl font-extrabold text-white tracking-tight font-['Outfit'] leading-tight mb-6"
           >
-            Dominate the <br className="hidden md:block" />
+            Tournament <br className="hidden md:block" />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">
-              Tournament Manager
+              Manager
             </span>
           </motion.h1>
 
