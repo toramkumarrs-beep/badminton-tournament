@@ -1,0 +1,74 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id          String       @id @default(cuid())
+  deviceId    String       @unique
+  name        String?
+  createdAt   DateTime     @default(now())
+  tournaments Tournament[]
+  players     Player[]
+}
+
+model Player {
+  id                String              @id @default(cuid())
+  name              String
+  userId            String
+  createdAt         DateTime            @default(now())
+  user              User                @relation(fields: [userId], references: [id])
+  tournamentPlayers TournamentPlayer[]
+}
+
+model Tournament {
+  id               String             @id @default(cuid())
+  name             String
+  type             String             // 'knockout' | 'league'
+  status           String             @default("setup") // 'setup' | 'active' | 'complete'
+  poolCount        Int                @default(1)
+  createdBy        String
+  createdAt        DateTime           @default(now())
+  user             User               @relation(fields: [createdBy], references: [id])
+  tournamentPlayers TournamentPlayer[]
+  matches          Match[]
+}
+
+model TournamentPlayer {
+  id           String     @id @default(cuid())
+  tournamentId String
+  playerId     String
+  playerName   String     // denormalized for easy access
+  seed         Int?
+  pool         Int?
+  tournament   Tournament @relation(fields: [tournamentId], references: [id], onDelete: Cascade)
+  player       Player     @relation(fields: [playerId], references: [id])
+}
+
+model Match {
+  id              String     @id @default(cuid())
+  tournamentId    String
+  round           Int
+  matchNumber     Int
+  player1Id       String?
+  player2Id       String?
+  player1Name     String?
+  player2Name     String?
+  score1          Int?
+  score2          Int?
+  winnerId        String?
+  winnerName      String?
+  isBye           Boolean    @default(false)
+  pool            Int?
+  nextMatchId     String?
+  nextMatchSlot   Int?       // 1 or 2
+  createdAt       DateTime   @default(now())
+  tournament      Tournament @relation(fields: [tournamentId], references: [id], onDelete: Cascade)
+}
