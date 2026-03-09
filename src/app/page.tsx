@@ -71,26 +71,13 @@ export default function HomePage() {
           <img src="/hero-bg.webp" alt="Badminton Action" className="w-full h-[60%] md:h-full object-cover object-top md:object-center opacity-100" />
         </div>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-20 text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
-            className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-white/10 bg-white/5 backdrop-blur-md mb-8"
-          >
-            <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
-            <span className="text-xs font-medium text-white/70 uppercase tracking-wider">Tournament Manager 2.0</span>
-          </motion.div>
-
           <motion.h1
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, delay: 0.1, ease: "easeOut" }}
             className="text-5xl md:text-7xl font-extrabold text-white tracking-tight font-['Outfit'] leading-tight mb-6"
           >
-            Tournament <br className="hidden md:block" />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">
-              Manager
-            </span>
+            Tournament Manager
           </motion.h1>
 
           <motion.p
