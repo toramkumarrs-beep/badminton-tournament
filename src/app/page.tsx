@@ -67,82 +67,113 @@ export default function HomePage() {
       </header>
 
       {/* Kinetic Apex Hero Section */}
-      <section className="relative pt-28 pb-20 min-h-[480px] overflow-hidden flex items-center justify-center">
-        {/* Background Image Layer */}
-        <div className="absolute inset-0 z-0 bg-background print:hidden">
-          {/* Subtle dark edge on right for text legibility, minimal on left to keep player vivid */}
-          <div className="absolute inset-0 bg-gradient-to-r from-[#0f131c]/30 via-transparent to-[#0f131c]/70 z-10" />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#0f131c] via-transparent to-[#0f131c]/40 z-10" />
-          <img src="/hero-bg.jpg" alt="Badminton Action" className="w-full h-full object-cover" style={{ objectPosition: '50% 40%' }} />
-        </div>
+      <section className="relative overflow-hidden">
 
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-20 text-center">
-          {/* Circuit Badge */}
-          <motion.div
-            initial={{ opacity: 0, y: 15 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, ease: "easeOut" }}
-            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#1E293B] border border-[#334155] shadow-lg mb-6"
-          >
-            <span className="w-2 h-2 rounded-full bg-secondary animate-ping" />
-            <span className="text-xs uppercase tracking-widest text-primary font-bold">Pro Circuit Tournament OS</span>
-            <span className="text-[#475569]">•</span>
-            <span className="text-xs text-[#94A3B8] font-semibold">v3.4 Automated Brackets</span>
-          </motion.div>
-
-          <motion.h1
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.8, delay: 0.1, ease: "easeOut" }}
-            className="text-5xl md:text-7xl font-extrabold text-white tracking-tight font-['Outfit'] leading-tight mb-6 drop-shadow-[0_4px_24px_rgba(0,0,0,0.8)]"
-          >
-            Tournament <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-[#acedff] to-secondary">Manager</span>
-          </motion.h1>
-
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
-            className="max-w-2xl mx-auto text-lg md:text-xl text-[#94A3B8] leading-relaxed font-normal mb-8"
-          >
-            Build Knockout brackets and League round-robins instantly. Track live scores, auto-advance winners, and share highly visual results.
-          </motion.p>
-
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.3, ease: "easeOut" }}
-            className="flex flex-wrap items-center justify-center gap-4 max-w-md mx-auto mb-12"
-          >
-            <Link href="/create" className="flex-1 min-w-[190px] inline-flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-xl bg-primary text-[#003640] font-bold text-base shadow-[0_0_24px_rgba(76,215,246,0.45)] hover:shadow-[0_0_36px_rgba(76,215,246,0.65)] hover:bg-[#06b6d4] transition-all">
-              <Trophy className="w-5 h-5" />
-              <span>Create Tournament</span>
-            </Link>
-            <Link href="/players" className="flex-1 min-w-[170px] inline-flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-xl bg-[#1E293B] hover:bg-[#262a33] text-white font-bold text-base border border-[#334155] shadow-md transition-all">
-              <Users className="w-5 h-5 text-primary" />
-              <span>Manage Players</span>
-            </Link>
-          </motion.div>
-
-          {/* Pro-Circuit Real-Time Stats Strip */}
-          <div className="w-full max-w-4xl mx-auto grid grid-cols-2 md:grid-cols-3 gap-4 p-4 rounded-2xl bg-[#131A26]/80 border border-[#334155] shadow-2xl backdrop-blur-md">
-            <div className="flex flex-col items-center p-3 rounded-xl bg-[#0f131c]">
-              <span className="text-xs uppercase text-[#94A3B8] font-semibold mb-1">Your Tourneys</span>
-              <span className="text-2xl font-black text-white font-['Outfit']">{tournaments.length}</span>
+        {/* ── MOBILE LAYOUT: image on top, text below ── */}
+        <div className="lg:hidden">
+          {/* Player image */}
+          <div className="relative w-full h-56 overflow-hidden">
+            <img
+              src="/hero-bg.jpg"
+              alt="Badminton Action"
+              className="w-full h-full object-cover"
+              style={{ objectPosition: '38% 35%' }}
+            />
+            {/* subtle bottom fade into content */}
+            <div className="absolute inset-0 bg-gradient-to-t from-[#0f131c] via-transparent to-[#0f131c]/40" />
+          </div>
+          {/* Text content */}
+          <div className="px-5 pt-5 pb-8 text-center">
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#1E293B] border border-[#334155] shadow-lg mb-4">
+              <span className="w-2 h-2 rounded-full bg-secondary animate-ping" />
+              <span className="text-[10px] uppercase tracking-widest text-primary font-bold">Pro Circuit Tournament OS</span>
+              <span className="text-[#475569] text-xs">•</span>
+              <span className="text-[10px] text-[#94A3B8] font-semibold">v3.4</span>
             </div>
-            <div className="flex flex-col items-center p-3 rounded-xl bg-[#0f131c]">
-              <span className="text-xs uppercase text-[#94A3B8] font-semibold mb-1">Engines Supported</span>
-              <span className="text-sm font-bold text-secondary flex items-center gap-1 mt-1">
-                <span className="w-2 h-2 rounded-full bg-secondary animate-pulse" />
-                Knockout & League
-              </span>
+            <h1 className="text-4xl font-extrabold text-white tracking-tight font-['Outfit'] leading-tight mb-3">
+              Tournament <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-[#acedff] to-secondary">Manager</span>
+            </h1>
+            <p className="text-sm text-[#94A3B8] leading-relaxed mb-6">
+              Build Knockout brackets and League round-robins instantly. Track live scores, auto-advance winners.
+            </p>
+            <div className="flex flex-col gap-3 max-w-xs mx-auto">
+              <Link href="/create" className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-primary text-[#003640] font-bold text-sm shadow-[0_0_20px_rgba(76,215,246,0.4)] hover:bg-[#06b6d4] transition-all">
+                <Trophy className="w-4 h-4" /> Create Tournament
+              </Link>
+              <Link href="/players" className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-[#1E293B] text-white font-bold text-sm border border-[#334155] transition-all">
+                <Users className="w-4 h-4 text-primary" /> Manage Players
+              </Link>
             </div>
-            <div className="col-span-2 md:col-span-1 flex flex-col items-center p-3 rounded-xl bg-[#0f131c]">
-              <span className="text-xs uppercase text-[#94A3B8] font-semibold mb-1">Automated Draw</span>
-              <span className="text-sm font-bold text-primary mt-1">Smart BYE Balancing</span>
+            {/* Stats strip */}
+            <div className="mt-6 grid grid-cols-3 gap-2 p-3 rounded-2xl bg-[#131A26]/80 border border-[#334155]">
+              <div className="flex flex-col items-center p-2 rounded-xl bg-[#0f131c]">
+                <span className="text-[10px] uppercase text-[#94A3B8] font-semibold mb-0.5">Tourneys</span>
+                <span className="text-xl font-black text-white font-['Outfit']">{tournaments.length}</span>
+              </div>
+              <div className="flex flex-col items-center p-2 rounded-xl bg-[#0f131c]">
+                <span className="text-[10px] uppercase text-[#94A3B8] font-semibold mb-0.5">Formats</span>
+                <span className="text-xs font-bold text-secondary mt-0.5">KO + RR</span>
+              </div>
+              <div className="flex flex-col items-center p-2 rounded-xl bg-[#0f131c]">
+                <span className="text-[10px] uppercase text-[#94A3B8] font-semibold mb-0.5">Draw</span>
+                <span className="text-xs font-bold text-primary mt-0.5">Auto BYE</span>
+              </div>
             </div>
           </div>
         </div>
+
+        {/* ── DESKTOP LAYOUT: full background image ── */}
+        <div className="hidden lg:block relative pt-28 pb-20 min-h-[480px] flex items-center justify-center">
+          {/* Background Image */}
+          <div className="absolute inset-0 z-0 bg-background print:hidden">
+            <div className="absolute inset-0 bg-gradient-to-r from-[#0f131c]/30 via-transparent to-[#0f131c]/70 z-10" />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#0f131c] via-transparent to-[#0f131c]/40 z-10" />
+            <img src="/hero-bg.jpg" alt="Badminton Action" className="w-full h-full object-cover" style={{ objectPosition: '50% 40%' }} />
+          </div>
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-20 text-center">
+            <motion.div initial={{ opacity: 0, y: 15 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, ease: "easeOut" }}
+              className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#1E293B] border border-[#334155] shadow-lg mb-6">
+              <span className="w-2 h-2 rounded-full bg-secondary animate-ping" />
+              <span className="text-xs uppercase tracking-widest text-primary font-bold">Pro Circuit Tournament OS</span>
+              <span className="text-[#475569]">•</span>
+              <span className="text-xs text-[#94A3B8] font-semibold">v3.4 Automated Brackets</span>
+            </motion.div>
+            <motion.h1 initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.8, delay: 0.1, ease: "easeOut" }}
+              className="text-5xl md:text-7xl font-extrabold text-white tracking-tight font-['Outfit'] leading-tight mb-6 drop-shadow-[0_4px_24px_rgba(0,0,0,0.8)]">
+              Tournament <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-[#acedff] to-secondary">Manager</span>
+            </motion.h1>
+            <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
+              className="max-w-2xl mx-auto text-lg md:text-xl text-[#94A3B8] leading-relaxed font-normal mb-8">
+              Build Knockout brackets and League round-robins instantly. Track live scores, auto-advance winners, and share highly visual results.
+            </motion.p>
+            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.3, ease: "easeOut" }}
+              className="flex flex-wrap items-center justify-center gap-4 max-w-md mx-auto mb-12">
+              <Link href="/create" className="flex-1 min-w-[190px] inline-flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-xl bg-primary text-[#003640] font-bold text-base shadow-[0_0_24px_rgba(76,215,246,0.45)] hover:shadow-[0_0_36px_rgba(76,215,246,0.65)] hover:bg-[#06b6d4] transition-all">
+                <Trophy className="w-5 h-5" /><span>Create Tournament</span>
+              </Link>
+              <Link href="/players" className="flex-1 min-w-[170px] inline-flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-xl bg-[#1E293B] hover:bg-[#262a33] text-white font-bold text-base border border-[#334155] shadow-md transition-all">
+                <Users className="w-5 h-5 text-primary" /><span>Manage Players</span>
+              </Link>
+            </motion.div>
+            <div className="w-full max-w-4xl mx-auto grid grid-cols-2 md:grid-cols-3 gap-4 p-4 rounded-2xl bg-[#131A26]/80 border border-[#334155] shadow-2xl backdrop-blur-md">
+              <div className="flex flex-col items-center p-3 rounded-xl bg-[#0f131c]">
+                <span className="text-xs uppercase text-[#94A3B8] font-semibold mb-1">Your Tourneys</span>
+                <span className="text-2xl font-black text-white font-['Outfit']">{tournaments.length}</span>
+              </div>
+              <div className="flex flex-col items-center p-3 rounded-xl bg-[#0f131c]">
+                <span className="text-xs uppercase text-[#94A3B8] font-semibold mb-1">Engines Supported</span>
+                <span className="text-sm font-bold text-secondary flex items-center gap-1 mt-1">
+                  <span className="w-2 h-2 rounded-full bg-secondary animate-pulse" /> Knockout &amp; League
+                </span>
+              </div>
+              <div className="col-span-2 md:col-span-1 flex flex-col items-center p-3 rounded-xl bg-[#0f131c]">
+                <span className="text-xs uppercase text-[#94A3B8] font-semibold mb-1">Automated Draw</span>
+                <span className="text-sm font-bold text-primary mt-1">Smart BYE Balancing</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
       </section>
 
       {/* Tournaments Grid */}
