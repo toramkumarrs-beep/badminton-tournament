@@ -1,30 +1,36 @@
 @import "tailwindcss";
 
 @theme {
-  --color-background: #000000;
-  /* Pure Black OLED */
-  --color-foreground: #FFFFFF;
-  /* Crisp White */
+  --color-background: #0f131c;
+  /* Deep Court Slate */
+  --color-foreground: #F8FAFC;
+  /* Shuttle White */
 
-  --color-primary-DEFAULT: #3b82f6;
-  /* Tech Blue */
-  --color-primary-hover: #2563eb;
+  --color-primary-DEFAULT: #4cd7f6;
+  /* Electric Cyan */
+  --color-primary-hover: #06b6d4;
+  /* Cyan Container */
 
-  --color-secondary-DEFAULT: #8b5cf6;
-  /* Neon Violet */
-  --color-secondary-hover: #7c3aed;
+  --color-secondary-DEFAULT: #4edea3;
+  /* Court Lime / Mint */
+  --color-secondary-hover: #00a572;
 
-  --color-destructive-DEFAULT: #ef4444;
-  /* Crimson Alert */
+  --color-destructive-DEFAULT: #EF4444;
+  /* Live Pulse Red */
 
-  --color-card: #0A0A0A;
-  /* Dark Gray */
+  --color-card: #131A26;
+  /* Court Slate Surface */
+
+  --color-court-elevated: #1E293B;
+  --color-court-border: #334155;
+  --color-court-border-bright: #475569;
+  --color-gold: #F59E0B;
 }
 
 @layer base {
   :root {
-    --background: #000000;
-    --foreground: #FFFFFF;
+    --background: #0f131c;
+    --foreground: #F8FAFC;
   }
 
   body {
@@ -36,40 +42,41 @@
   }
 
   ::selection {
-    background-color: rgba(59, 130, 246, 0.3);
+    background-color: rgba(76, 215, 246, 0.3);
+    color: #4cd7f6;
   }
 }
 
 @layer utilities {
   .glass {
-    background-color: rgba(10, 10, 10, 0.6);
+    background-color: rgba(19, 26, 38, 0.75);
     backdrop-filter: blur(24px);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.05), 0 20px 25px -5px rgba(0, 0, 0, 0.5);
+    border: 1px solid rgba(51, 65, 85, 0.6);
+    box-shadow: 0 0 0 1px rgba(76, 215, 246, 0.05), 0 20px 25px -5px rgba(0, 0, 0, 0.5);
   }
 
   .glass-card {
     border-radius: 1.25rem;
-    background-color: rgba(10, 10, 10, 0.5);
+    background-color: rgba(19, 26, 38, 0.65);
     backdrop-filter: blur(20px);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.5);
+    border: 1px solid rgba(51, 65, 85, 0.7);
+    box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.6);
     transition-property: all;
     transition-duration: 300ms;
   }
 
   .glass-hover:hover {
-    background-color: rgba(255, 255, 255, 0.06);
-    border-color: rgba(255, 255, 255, 0.15);
+    background-color: rgba(30, 41, 59, 0.8);
+    border-color: rgba(76, 215, 246, 0.4);
     transform: translateY(-2px);
   }
 
   .text-glow {
-    text-shadow: 0 0 20px rgba(139, 92, 246, 0.5);
+    text-shadow: 0 0 20px rgba(76, 215, 246, 0.5);
   }
 
   .text-glow-primary {
-    text-shadow: 0 0 20px rgba(16, 185, 129, 0.5);
+    text-shadow: 0 0 20px rgba(78, 222, 163, 0.5);
   }
 
   .hide-scrollbar::-webkit-scrollbar {
@@ -77,6 +84,34 @@
   }
 
   .hide-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  /* Safe-area insets for mobile notch/home-indicator */
+  .pb-safe {
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+  .pt-safe {
+    padding-top: env(safe-area-inset-top, 0px);
+  }
+  .pl-safe {
+    padding-left: env(safe-area-inset-left, 0px);
+  }
+  .pr-safe {
+    padding-right: env(safe-area-inset-right, 0px);
+  }
+
+  /* Smooth momentum scroll on iOS */
+  .scroll-touch {
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* Hide scrollbar (alias) */
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
     -ms-overflow-style: none;
     scrollbar-width: none;
   }

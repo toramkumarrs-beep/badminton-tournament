@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Trash2, UserPlus, Users, ArrowLeft, Loader2, Dribbble } from 'lucide-react'
+import { Trash2, UserPlus, Users, ArrowLeft, Loader2, Dribbble, Trophy } from 'lucide-react'
 
 interface Player {
     id: string
@@ -45,44 +45,45 @@ export default function PlayersPage() {
     }
 
     return (
-        <div className="min-h-screen flex flex-col font-sans">
-            <nav className="sticky top-0 z-50 glass border-b border-white/5">
+        <div className="min-h-screen flex flex-col font-sans bg-background text-white">
+            <header className="sticky top-0 z-50 bg-[#131A26]/90 backdrop-blur-xl border-b border-[#334155]/60">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-                    <Link href="/" className="flex items-center gap-2 group">
-                        <div className="w-8 h-8 rounded-lg bg-gradient-to-tr from-primary to-secondary flex items-center justify-center shadow-lg group-hover:shadow-primary/50 transition-all">
-                            <Dribbble className="w-5 h-5 text-white" />
+                    <Link href="/" className="flex items-center gap-3 group">
+                        <div className="w-9 h-9 rounded-lg bg-[#1E293B] border border-primary/30 flex items-center justify-center text-primary group-hover:border-primary group-hover:shadow-[0_0_12px_rgba(76,215,246,0.35)] transition-all">
+                            <Trophy className="w-5 h-5 text-primary" />
                         </div>
-                        <span className="font-bold text-xl tracking-tight text-white font-['Outfit']">
-                            Shuttle<span className="text-secondary">Court</span>
+                        <span className="font-extrabold text-xl tracking-tight text-white font-['Outfit']">
+                            Shuttle<span className="text-primary">Court</span>
                         </span>
                     </Link>
-                    <Link href="/" className="text-sm font-medium text-white/70 hover:text-white flex items-center gap-2 transition-colors">
+                    <Link href="/" className="text-sm font-semibold text-[#94A3B8] hover:text-white flex items-center gap-2 transition-colors px-3 py-1.5 rounded-lg hover:bg-white/5">
                         <ArrowLeft className="w-4 h-4" />
-                        Back to Home
+                        Back to Console
                     </Link>
                 </div>
-            </nav>
+            </header>
 
             <main className="flex-grow max-w-3xl w-full mx-auto px-4 sm:px-6 py-12">
-                <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} className="mb-12">
-                    <h1 className="text-4xl md:text-5xl font-extrabold text-white tracking-tight font-['Outfit'] mb-4 flex items-center gap-4">
+                <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} className="mb-10">
+                    <span className="text-xs font-bold uppercase tracking-widest text-primary mb-2 block">Athletes Database</span>
+                    <h1 className="text-4xl md:text-5xl font-extrabold text-white tracking-tight font-['Outfit'] mb-3 flex items-center gap-4">
                         <Users className="w-10 h-10 text-primary" />
-                        Player <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">Roster</span>
+                        Player <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-[#acedff] to-secondary">Roster</span>
                     </h1>
-                    <p className="text-lg text-white/50">Manage your athletes. Build your master roster here to easily select them during tournament creation.</p>
+                    <p className="text-base text-[#94A3B8]">Manage your verified athletes. Build your master roster here to easily seed and dispatch tournaments.</p>
                 </motion.div>
 
-                <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }} className="glass-card p-6 mb-12">
-                    <h2 className="text-sm font-semibold text-white/50 uppercase tracking-wider mb-4">Add New Player</h2>
+                <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }} className="rounded-2xl bg-[#131A26] border border-[#334155] p-6 mb-10 shadow-xl">
+                    <h2 className="text-xs font-bold text-[#94A3B8] uppercase tracking-wider mb-4">Add New Athlete</h2>
                     <div className="flex flex-col sm:flex-row gap-3">
                         <div className="relative flex-grow group">
                             <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                                <UserPlus className="h-5 w-5 text-white/30 group-focus-within:text-primary transition-colors" />
+                                <UserPlus className="h-5 w-5 text-[#475569] group-focus-within:text-primary transition-colors" />
                             </div>
                             <input
                                 type="text"
-                                className="w-full bg-white/5 border border-white/10 rounded-xl py-4 pl-12 pr-4 text-white placeholder-white/30 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary/50 transition-all shadow-inner"
-                                placeholder="Player's full name..."
+                                className="w-full bg-[#0f131c] border border-[#334155] rounded-xl py-3.5 pl-12 pr-4 text-white placeholder-[#475569] focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary transition-all shadow-inner text-sm"
+                                placeholder="Athlete's full name..."
                                 value={newName}
                                 onChange={e => setNewName(e.target.value)}
                                 onKeyDown={e => e.key === 'Enter' && addPlayer()}
@@ -92,7 +93,7 @@ export default function PlayersPage() {
                         <button
                             onClick={addPlayer}
                             disabled={!newName.trim()}
-                            className="bg-primary hover:bg-[#2563eb] text-white font-semibold py-4 px-8 rounded-xl disabled:opacity-50 disabled:cursor-not-allowed transition-colors shadow-[0_0_20px_-5px_rgba(59,130,246,0.4)] hover:shadow-[0_0_30px_-5px_rgba(59,130,246,0.6)] flex-shrink-0"
+                            className="bg-primary hover:bg-[#06b6d4] text-[#003640] font-bold py-3.5 px-7 rounded-xl disabled:opacity-50 disabled:cursor-not-allowed transition-all shadow-[0_0_20px_rgba(76,215,246,0.35)] flex-shrink-0 text-sm"
                         >
                             Add to Roster
                         </button>
@@ -100,31 +101,31 @@ export default function PlayersPage() {
                 </motion.div>
 
                 {loading ? (
-                    <div className="flexjustify-center py-12 text-white/50">
-                        <Loader2 className="w-8 h-8 animate-spin text-secondary mx-auto mb-4" />
-                        <p className="text-center">Loading players...</p>
+                    <div className="flex flex-col items-center justify-center py-12 text-[#94A3B8]">
+                        <Loader2 className="w-8 h-8 animate-spin text-primary mx-auto mb-4" />
+                        <p className="text-center font-medium">Loading roster...</p>
                     </div>
                 ) : players.length === 0 ? (
-                    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-center py-20 px-6 border border-dashed border-white/10 rounded-3xl bg-white/5">
-                        <div className="w-16 h-16 rounded-full bg-white/5 flex items-center justify-center mx-auto mb-6">
-                            <Users className="w-8 h-8 text-white/20" />
+                    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-center py-16 px-6 border border-dashed border-[#334155] rounded-3xl bg-[#131A26]/50">
+                        <div className="w-16 h-16 rounded-2xl bg-[#1E293B] border border-[#334155] flex items-center justify-center mx-auto mb-4 text-[#94A3B8]">
+                            <Users className="w-8 h-8 opacity-40" />
                         </div>
-                        <h3 className="text-xl font-medium text-white mb-2">Your roster is empty</h3>
-                        <p className="text-white/50">Add some players above to get started.</p>
+                        <h3 className="text-xl font-bold text-white mb-2 font-['Outfit']">Your roster is empty</h3>
+                        <p className="text-[#94A3B8] text-sm">Add some players above to get started with tournament draws.</p>
                     </motion.div>
                 ) : (
                     <div>
-                        <div className="flex items-center justify-between mb-6 border-b border-white/10 pb-4">
-                            <h2 className="text-lg font-semibold text-white flex items-center gap-2">
-                                <span className="w-2 h-2 rounded-full bg-primary" />
-                                Registered Players
+                        <div className="flex items-center justify-between mb-6 border-b border-[#334155] pb-4">
+                            <h2 className="text-lg font-bold text-white flex items-center gap-2 font-['Outfit']">
+                                <span className="w-2 h-2 rounded-full bg-secondary" />
+                                Registered Athletes
                             </h2>
-                            <span className="text-sm font-medium text-white/40 bg-white/5 px-3 py-1 rounded-full">{players.length} Total</span>
+                            <span className="text-xs font-bold text-primary bg-[#1E293B] border border-[#334155] px-3 py-1 rounded-full">{players.length} Total</span>
                         </div>
 
                         <div className="space-y-3">
                             <AnimatePresence>
-                                {players.map((p, i) => (
+                                {players.map((p) => (
                                     <motion.div
                                         key={p.id}
                                         initial={{ opacity: 0, height: 0, marginBottom: 0 }}
@@ -133,17 +134,17 @@ export default function PlayersPage() {
                                         transition={{ duration: 0.2 }}
                                         className="group"
                                     >
-                                        <div className="flex items-center justify-between p-4 bg-white/5 hover:bg-white/[0.08] border border-white/5 hover:border-white/10 rounded-2xl transition-all">
+                                        <div className="flex items-center justify-between p-4 bg-[#131A26] hover:bg-[#181f2d] border border-[#334155] hover:border-primary/40 rounded-2xl transition-all shadow-md">
                                             <div className="flex items-center gap-4">
-                                                <div className="w-10 h-10 rounded-full bg-gradient-to-br from-white/10 to-white/5 flex items-center justify-center text-sm font-bold text-white/50 group-hover:text-white group-hover:from-secondary/20 group-hover:to-primary/20 transition-all">
+                                                <div className="w-10 h-10 rounded-xl bg-[#1E293B] border border-[#334155] flex items-center justify-center text-sm font-extrabold text-primary font-['Outfit']">
                                                     {p.name.charAt(0).toUpperCase()}
                                                 </div>
-                                                <span className="text-lg font-medium text-white tracking-wide">{p.name}</span>
+                                                <span className="text-base font-semibold text-white tracking-wide">{p.name}</span>
                                             </div>
                                             <button
                                                 onClick={() => deletePlayer(p.id, p.name)}
-                                                className="p-2 text-white/30 hover:text-red-400 hover:bg-red-400/10 rounded-xl transition-colors"
-                                                title="Remove player"
+                                                className="p-2 text-[#94A3B8] hover:text-red-400 hover:bg-red-400/10 rounded-xl transition-colors"
+                                                title="Remove athlete"
                                             >
                                                 <Trash2 className="w-5 h-5" />
                                             </button>

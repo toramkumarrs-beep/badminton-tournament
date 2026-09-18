@@ -307,3 +307,82 @@ export function calculateLeagueTable(
 
     return rows
 }
+
+// ─── League Qualification Status ───────────────────────────────────────────────
+
+export type QualificationStatus = 'QUALIFIED' | 'IN_CONTENTION' | 'ELIMINATED'
+
+export function getQualificationStatus(
+    rows: LeagueTableRow[],
+    qualifyCount: number = 2
+): (LeagueTableRow & { status: QualificationStatus })[] {
+    return rows.map((row, idx) => {
+        let status: QualificationStatus
+        if (idx < qualifyCount) {
+            status = 'QUALIFIED'
+        } else if (row.played > 0 && row.won > 0) {
+            status = 'IN_CONTENTION'
+        } else {
+            status = 'ELIMINATED'
+        }
+        return { ...row, status }
+    })
+}
+
+// ─── Head-to-Head Matrix ────────────────────────────────────────────────────────
+
+export interface H2HCell {
+    outcome: 'WON' | 'LOST' | 'SCHEDULED' | 'SELF'
+    setScore: string   // e.g. "21-19, 21-17"
+    matchId?: string
+}
+
+export type H2HMatrix = Map<string, Map<string, H2HCell>>
+
+export function calculateH2HMatrix(
+    players: BracketPlayer[],
+    matches: Array<{
+        id?: string
+        player1Id: string | null
+        player2Id: string | null
+        score1: number | null
+        score2: number | null
+        winnerId: string | null
+    }>
+): H2HMatrix {
+    const matrix: H2HMatrix = new Map()
+
+    // Initialize all cells
+    players.forEach(p1 => {
+        const row = new Map<string, H2HCell>()
+        players.forEach(p2 => {
+            if (p1.id === p2.id) {
+                row.set(p2.id, { outcome: 'SELF', setScore: '—' })
+            } else {
+                row.set(p2.id, { outcome: 'SCHEDULED', setScore: 'TBD' })
+            }
+        })
+        matrix.set(p1.id, row)
+    })
+
+    // Fill in completed matches
+    matches.forEach(m => {
+        if (!m.player1Id || !m.player2Id) return
+        const r1 = matrix.get(m.player1Id)
+        const r2 = matrix.get(m.player2Id)
+        if (!r1 || !r2) return
+
+        if (m.score1 != null && m.score2 != null && m.winnerId) {
+            // Outcome for player1 perspective
+            const outcome1: 'WON' | 'LOST' = m.winnerId === m.player1Id ? 'WON' : 'LOST'
+            const outcome2: 'WON' | 'LOST' = m.winnerId === m.player2Id ? 'WON' : 'LOST'
+            const scores = `${m.score1}-${m.score2}`
+            const scoresReversed = `${m.score2}-${m.score1}`
+
+            r1.set(m.player2Id, { outcome: outcome1, setScore: scores, matchId: m.id })
+            r2.set(m.player1Id, { outcome: outcome2, setScore: scoresReversed, matchId: m.id })
+        }
+    })
+
+    return matrix
+}

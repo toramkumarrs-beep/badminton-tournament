@@ -40,51 +40,69 @@ export default function HomePage() {
   }, [])
 
   return (
-    <div className="min-h-screen flex flex-col">
-      {/* Navigation */}
-      <nav className="sticky top-0 z-50 glass border-b border-white/5">
+    <div className="min-h-screen flex flex-col font-sans">
+      {/* Kinetic Apex Navigation */}
+      <header className="sticky top-0 z-50 bg-[#131A26]/90 backdrop-blur-xl border-b border-[#334155]/60">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-          <Link href="/" className="flex items-center gap-2 group">
-            <div className="w-8 h-8 rounded-lg bg-gradient-to-tr from-primary to-secondary flex items-center justify-center shadow-lg group-hover:shadow-primary/50 transition-all">
-              <Dribbble className="w-5 h-5 text-white" />
+          <Link href="/" className="flex items-center gap-3 group">
+            <div className="w-9 h-9 rounded-lg bg-[#1E293B] border border-primary/30 flex items-center justify-center text-primary group-hover:border-primary group-hover:shadow-[0_0_12px_rgba(76,215,246,0.35)] transition-all">
+              <Trophy className="w-5 h-5 text-primary" />
             </div>
-            <span className="font-bold text-xl tracking-tight text-white font-['Outfit']">
-              Shuttle<span className="text-secondary">Court</span>
+            <span className="font-extrabold text-xl tracking-tight text-white font-['Outfit']">
+              Shuttle<span className="text-primary">Court</span>
             </span>
           </Link>
-          <div className="flex items-center gap-4">
-            {userId && (
-              <Link href="/create" className="text-sm font-medium text-white/80 hover:text-white hover:bg-white/10 px-4 py-2 rounded-full transition-colors">
-                New Tournament
-              </Link>
-            )}
+
+          <div className="flex items-center gap-3 sm:gap-4">
+            <Link href="/players" className="text-sm font-semibold text-[#94A3B8] hover:text-white px-3 py-1.5 rounded-lg hover:bg-white/5 transition-colors flex items-center gap-1.5">
+              <Users className="w-4 h-4 text-primary" />
+              <span className="hidden sm:inline">Players</span>
+            </Link>
+            <Link href="/create" className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-primary text-[#003640] font-bold text-sm shadow-[0_0_16px_rgba(76,215,246,0.35)] hover:bg-[#06b6d4] hover:shadow-[0_0_24px_rgba(76,215,246,0.55)] transition-all">
+              <span>+ Create</span>
+              <span className="hidden sm:inline">Tournament</span>
+            </Link>
           </div>
         </div>
-      </nav>
+      </header>
 
-      {/* Hero Section */}
-      <section className="relative pt-32 pb-20 overflow-hidden min-h-[600px] flex items-center justify-center">
+      {/* Kinetic Apex Hero Section */}
+      <section className="relative pt-24 pb-16 overflow-hidden flex items-center justify-center">
         {/* Background Image Layer */}
         <div className="absolute inset-0 z-0 bg-background print:hidden">
-          <div className="absolute inset-0 bg-background/30 z-10" />
-          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-background/60 to-background z-10" />
-          <img src="/hero-bg.webp" alt="Badminton Action" className="w-full h-[60%] md:h-full object-cover object-top md:object-center opacity-100" />
+          <div className="absolute inset-0 bg-background/50 z-10" />
+          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-background/70 to-background z-10" />
+          <img src="/hero-bg.webp" alt="Badminton Action" className="w-full h-full object-cover object-top opacity-75 mix-blend-luminosity" />
         </div>
+
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-20 text-center">
+          {/* Circuit Badge */}
+          <motion.div
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
+            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#1E293B] border border-[#334155] shadow-lg mb-6"
+          >
+            <span className="w-2 h-2 rounded-full bg-secondary animate-ping" />
+            <span className="text-xs uppercase tracking-widest text-primary font-bold">Pro Circuit Tournament OS</span>
+            <span className="text-[#475569]">•</span>
+            <span className="text-xs text-[#94A3B8] font-semibold">v3.4 Automated Brackets</span>
+          </motion.div>
+
           <motion.h1
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, delay: 0.1, ease: "easeOut" }}
-            className="text-5xl md:text-7xl font-extrabold text-white tracking-tight font-['Outfit'] leading-tight mb-6"
+            className="text-5xl md:text-7xl font-extrabold text-white tracking-tight font-['Outfit'] leading-tight mb-6 drop-shadow-[0_4px_24px_rgba(0,0,0,0.8)]"
           >
-            Tournament Manager
+            Tournament <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-[#acedff] to-secondary">Manager</span>
           </motion.h1>
 
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
-            className="mt-6 max-w-2xl mx-auto text-lg md:text-xl text-white/60 leading-relaxed font-light"
+            className="max-w-2xl mx-auto text-lg md:text-xl text-[#94A3B8] leading-relaxed font-normal mb-8"
           >
             Build Knockout brackets and League round-robins instantly. Track live scores, auto-advance winners, and share highly visual results.
           </motion.p>
@@ -93,48 +111,70 @@ export default function HomePage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.3, ease: "easeOut" }}
-            className="mt-10 flex flex-col sm:flex-row gap-4 justify-center items-center"
+            className="flex flex-wrap items-center justify-center gap-4 max-w-md mx-auto mb-12"
           >
-            <Link href="/create" className="group relative inline-flex items-center justify-center gap-3 px-8 py-4 bg-gradient-to-r from-primary to-secondary text-white font-semibold rounded-full shadow-[0_0_40px_-10px_rgba(124,58,237,0.8)] hover:shadow-[0_0_60px_-15px_rgba(124,58,237,1)] transition-all duration-300 hover:scale-105 overflow-hidden">
-              <div className="absolute inset-0 w-full h-full bg-white/20 blur-md group-hover:translate-x-full transition-transform duration-700 -translate-x-full" />
+            <Link href="/create" className="flex-1 min-w-[190px] inline-flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-xl bg-primary text-[#003640] font-bold text-base shadow-[0_0_24px_rgba(76,215,246,0.45)] hover:shadow-[0_0_36px_rgba(76,215,246,0.65)] hover:bg-[#06b6d4] transition-all">
               <Trophy className="w-5 h-5" />
-              Create Tournament
+              <span>Create Tournament</span>
             </Link>
-            <Link href="/players" className="group inline-flex items-center justify-center gap-3 px-8 py-4 bg-white/5 hover:bg-white/10 border border-white/10 text-white font-semibold rounded-full backdrop-blur-md transition-all duration-300 hover:scale-[1.02]">
-              <Users className="w-5 h-5 text-white/70 group-hover:text-white" />
-              Manage Players
+            <Link href="/players" className="flex-1 min-w-[170px] inline-flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-xl bg-[#1E293B] hover:bg-[#262a33] text-white font-bold text-base border border-[#334155] shadow-md transition-all">
+              <Users className="w-5 h-5 text-primary" />
+              <span>Manage Players</span>
             </Link>
           </motion.div>
+
+          {/* Pro-Circuit Real-Time Stats Strip */}
+          <div className="w-full max-w-4xl mx-auto grid grid-cols-2 md:grid-cols-3 gap-4 p-4 rounded-2xl bg-[#131A26]/80 border border-[#334155] shadow-2xl backdrop-blur-md">
+            <div className="flex flex-col items-center p-3 rounded-xl bg-[#0f131c]">
+              <span className="text-xs uppercase text-[#94A3B8] font-semibold mb-1">Your Tourneys</span>
+              <span className="text-2xl font-black text-white font-['Outfit']">{tournaments.length}</span>
+            </div>
+            <div className="flex flex-col items-center p-3 rounded-xl bg-[#0f131c]">
+              <span className="text-xs uppercase text-[#94A3B8] font-semibold mb-1">Engines Supported</span>
+              <span className="text-sm font-bold text-secondary flex items-center gap-1 mt-1">
+                <span className="w-2 h-2 rounded-full bg-secondary animate-pulse" />
+                Knockout & League
+              </span>
+            </div>
+            <div className="col-span-2 md:col-span-1 flex flex-col items-center p-3 rounded-xl bg-[#0f131c]">
+              <span className="text-xs uppercase text-[#94A3B8] font-semibold mb-1">Automated Draw</span>
+              <span className="text-sm font-bold text-primary mt-1">Smart BYE Balancing</span>
+            </div>
+          </div>
         </div>
       </section>
 
       {/* Tournaments Grid */}
       <main className="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-24 w-full">
-        <div className="flex items-center justify-between mb-8 pb-4 border-b border-white/10">
-          <h2 className="text-2xl font-semibold text-white font-['Outfit'] flex items-center gap-3">
-            <span className="w-2 h-8 rounded-full bg-secondary" />
-            My Tournaments
-          </h2>
+        <div className="flex items-center justify-between mb-8 pb-4 border-b border-[#334155]/60">
+          <div>
+            <span className="text-xs font-bold uppercase tracking-wider text-primary block mb-1">Control Console</span>
+            <h2 className="text-2xl sm:text-3xl font-extrabold text-white font-['Outfit'] tracking-tight">
+              My Tournaments
+            </h2>
+          </div>
+          <Link href="/create" className="text-xs sm:text-sm font-bold text-primary hover:text-white transition-colors">
+            + New Tournament
+          </Link>
         </div>
 
         {loading ? (
-          <div className="flex flex-col items-center justify-center py-20 text-white/50">
+          <div className="flex flex-col items-center justify-center py-20 text-[#94A3B8]">
             <Loader2 className="w-8 h-8 animate-spin text-primary mb-4" />
-            <p>Loading your dashboard...</p>
+            <p className="font-medium">Loading your console...</p>
           </div>
         ) : tournaments.length === 0 ? (
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
-            className="relative overflow-hidden glass-card p-12 text-center flex flex-col items-center"
+            className="relative overflow-hidden rounded-2xl bg-[#131A26] border border-[#334155] p-12 text-center flex flex-col items-center"
           >
-            <div className="absolute inset-0 bg-gradient-to-b from-primary/5 to-transparent pointer-events-none" />
-            <div className="w-20 h-20 mb-6 rounded-full bg-white/5 border border-white/10 flex items-center justify-center">
-              <Trophy className="w-10 h-10 text-white/30" />
+            <div className="w-20 h-20 mb-6 rounded-2xl bg-[#1E293B] border border-[#334155] flex items-center justify-center text-primary shadow-inner">
+              <Trophy className="w-10 h-10 text-primary" />
             </div>
-            <h3 className="text-xl font-semibold text-white mb-2">No Tournaments Yet</h3>
-            <p className="text-white/50 mb-8 max-w-md">You haven't created any tournaments. Click the button below to set up your first knockout or league.</p>
-            <Link href="/create" className="px-6 py-3 bg-white/10 hover:bg-white/20 border border-white/10 rounded-full text-white font-medium transition-colors">
+            <h3 className="text-2xl font-bold text-white font-['Outfit'] mb-2">No Tournaments Yet</h3>
+            <p className="text-[#94A3B8] mb-8 max-w-md">You haven't created any tournaments. Click below to launch your first Knockout or League bracket.</p>
+            <Link href="/create" className="px-6 py-3 bg-primary hover:bg-[#06b6d4] rounded-xl text-[#003640] font-bold transition-all shadow-[0_0_16px_rgba(76,215,246,0.35)]">
               + Create Tournament
             </Link>
           </motion.div>
@@ -145,38 +185,41 @@ export default function HomePage() {
                 key={t.id}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: i * 0.1 }}
+                transition={{ delay: i * 0.08 }}
               >
-                <Link href={`/tournament/${t.id}`} className="block group">
-                  <div className="glass-card p-6 h-full flex flex-col justify-between glass-hover relative overflow-hidden">
-                    <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-primary/20 to-transparent rounded-bl-full opacity-50 group-hover:opacity-100 transition-opacity" />
+                <Link href={`/tournament/${t.id}`} className="block group h-full">
+                  <div className="rounded-2xl bg-[#131A26] border border-[#334155] p-6 h-full flex flex-col justify-between hover:border-primary/50 hover:bg-[#181f2d] hover:shadow-[0_12px_32px_rgba(0,0,0,0.6)] transition-all duration-300 relative overflow-hidden">
+                    <div className="absolute top-0 right-0 w-32 h-32 bg-primary/10 rounded-full blur-2xl pointer-events-none group-hover:bg-primary/20 transition-all" />
 
                     <div>
                       <div className="flex items-start justify-between mb-4 relative z-10">
-                        <div className="bg-white/10 p-2.5 rounded-xl border border-white/5 group-hover:bg-primary/20 group-hover:border-primary/30 transition-colors">
-                          <Trophy className={`w-5 h-5 ${t.type === 'knockout' ? 'text-primary' : 'text-secondary'}`} />
-                        </div>
+                        <span className={`px-2.5 py-1 rounded-md text-xs font-bold uppercase tracking-wider ${t.type === 'knockout' ? 'bg-primary/15 text-primary border border-primary/25' : 'bg-secondary/15 text-secondary border border-secondary/25'}`}>
+                          {t.type === 'knockout' ? 'Knockout' : 'League'}
+                        </span>
                         {t.status === 'active' ? (
-                          <span className="px-2.5 py-1 rounded-md bg-secondary/10 text-secondary border border-secondary/20 text-xs font-semibold tracking-wide uppercase">Active</span>
+                          <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-secondary/10 text-secondary border border-secondary/20 text-xs font-bold uppercase">
+                            <span className="w-1.5 h-1.5 rounded-full bg-secondary animate-pulse" /> Active
+                          </span>
                         ) : t.status === 'complete' ? (
-                          <span className="px-2.5 py-1 rounded-md bg-primary/10 text-primary border border-primary/20 text-xs font-semibold tracking-wide uppercase">Complete</span>
+                          <span className="px-2.5 py-1 rounded-md bg-primary/10 text-primary border border-primary/20 text-xs font-bold uppercase">Complete</span>
                         ) : (
-                          <span className="px-2.5 py-1 rounded-md bg-white/5 text-white/50 border border-white/10 text-xs font-semibold tracking-wide uppercase">Draft</span>
+                          <span className="px-2.5 py-1 rounded-md bg-white/5 text-[#94A3B8] border border-[#334155] text-xs font-bold uppercase">Draft</span>
                         )}
                       </div>
-                      <h3 className="text-xl font-bold text-white mb-1 group-hover:text-primary transition-colors line-clamp-2 leading-tight">
+
+                      <h3 className="text-xl font-bold text-white mb-2 group-hover:text-primary transition-colors line-clamp-2 leading-snug font-['Outfit']">
                         {t.name}
                       </h3>
-                      <p className="text-sm font-medium text-white/50 mb-6 uppercase tracking-wider">
-                        {t.type === 'knockout' ? 'Knockout Bracket' : 'League Round-Robin'}
+                      <p className="text-xs font-semibold text-[#94A3B8] uppercase tracking-wider mb-6">
+                        {t.type === 'knockout' ? 'Single Elimination Bracket' : 'Round-Robin Standings'}
                       </p>
                     </div>
 
-                    <div className="flex items-center justify-between border-t border-white/10 pt-4 mt-4 text-sm text-white/40">
+                    <div className="flex items-center justify-between border-t border-[#334155] pt-4 mt-4 text-xs font-medium text-[#94A3B8]">
                       <span>{new Date(t.createdAt).toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: 'numeric' })}</span>
-                      <span className="flex items-center gap-1 group-hover:text-white transition-colors">
-                        View
-                        <MoveRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                      <span className="flex items-center gap-1 text-primary font-bold group-hover:translate-x-1 transition-transform">
+                        Enter Arena
+                        <MoveRight className="w-4 h-4" />
                       </span>
                     </div>
                   </div>
@@ -186,6 +229,24 @@ export default function HomePage() {
           </div>
         )}
       </main>
+
+      {/* ── Mobile Bottom Navigation ── */}
+      <nav className="lg:hidden fixed bottom-0 w-full z-40 pb-safe bg-[#131A26]/90 backdrop-blur-xl border-t border-[#334155]/60">
+        <div className="flex justify-around items-center h-16 px-2">
+          <Link href="/" className="flex flex-col items-center justify-center gap-0.5 min-w-[56px] h-11 text-[#4cd7f6]">
+            <span className="text-lg">⊟</span>
+            <span className="text-[10px] font-bold uppercase tracking-wider">Events</span>
+          </Link>
+          <Link href="/create" className="flex flex-col items-center justify-center gap-0.5 min-w-[56px] h-11 text-[#94A3B8] hover:text-white transition-colors">
+            <span className="text-lg">⊕</span>
+            <span className="text-[10px] font-bold uppercase tracking-wider">New</span>
+          </Link>
+          <Link href="/players" className="flex flex-col items-center justify-center gap-0.5 min-w-[56px] h-11 text-[#94A3B8] hover:text-white transition-colors">
+            <span className="text-lg">⊞</span>
+            <span className="text-[10px] font-bold uppercase tracking-wider">Players</span>
+          </Link>
+        </div>
+      </nav>
     </div>
   )
 }
