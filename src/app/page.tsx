@@ -67,12 +67,13 @@ export default function HomePage() {
       </header>
 
       {/* Kinetic Apex Hero Section */}
-      <section className="relative pt-24 pb-16 overflow-hidden flex items-center justify-center">
+      <section className="relative pt-28 pb-20 min-h-[480px] overflow-hidden flex items-center justify-center">
         {/* Background Image Layer */}
         <div className="absolute inset-0 z-0 bg-background print:hidden">
-          <div className="absolute inset-0 bg-background/50 z-10" />
-          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-background/70 to-background z-10" />
-          <img src="/hero-bg.webp" alt="Badminton Action" className="w-full h-full object-cover object-top opacity-75 mix-blend-luminosity" />
+          {/* Subtle dark edge on right for text legibility, minimal on left to keep player vivid */}
+          <div className="absolute inset-0 bg-gradient-to-r from-[#0f131c]/30 via-transparent to-[#0f131c]/70 z-10" />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#0f131c] via-transparent to-[#0f131c]/40 z-10" />
+          <img src="/hero-bg.jpg" alt="Badminton Action" className="w-full h-full object-cover" style={{ objectPosition: '50% 40%' }} />
         </div>
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-20 text-center">

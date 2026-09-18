@@ -22,8 +22,9 @@ export default function PlayersPage() {
         if (!uid) { setLoading(false); return }
         setUserId(uid)
         fetch(`/api/players?userId=${uid}`)
-            .then(r => r.json())
+            .then(r => r.ok ? r.json() : [])
             .then(data => { setPlayers(Array.isArray(data) ? data : []); setLoading(false) })
+            .catch(() => setLoading(false))
     }, [])
 
     const addPlayer = async () => {
@@ -33,8 +34,9 @@ export default function PlayersPage() {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ userId, name: newName.trim() }),
         })
+        if (!res.ok) { alert('Failed to add player. Check the console for details.'); return }
         const p = await res.json()
-        setPlayers(prev => [p, ...prev]) // Add to top for better UX
+        setPlayers(prev => [p, ...prev])
         setNewName('')
     }
 
